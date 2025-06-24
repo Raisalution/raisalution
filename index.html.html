@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Райзалюция | MushyStudio</title>
+
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --transition: all 0.4s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(0,0,0,0.03)" stroke-width="1"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo span {
+            color: #7f8c8d;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 18px;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #2ecc71;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .active {
+            color: #27ae60;
+        }
+        
+        .active::after {
+            width: 100%;
+        }
+        
+        /* Основной контент */
+        .page {
+            min-height: 100vh;
+            padding: 120px 0 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .page-title h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            border-radius: 2px;
+        }
+        
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Главная страница */
+        #home {
+            background: linear-gradient(135deg, #f1f9f5 0%, #e6f7ef 100%);
+        }
+        
+        #home .page-title::after {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+        }
+        
+        .hero {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text h3 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #27ae60;
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: #34495e;
+        }
+        
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            height: 350px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .hero-image::before {
+            content: 'MushyStudio';
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 120px;
+            font-weight: 800;
+            transform: rotate(-30deg);
+            letter-spacing: 5px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.6);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: #27ae60;
+        }
+        
+        .feature-card h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .feature-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+        
+        /* Страница персонажей */
+        #characters {
+            background: linear-gradient(135deg, #fef5f5 0%, #fcecec 100%);
+            display: none;
+        }
+        
+        #characters .page-title::after {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+        
+        .coming-soon {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .coming-soon i {
+            font-size: 80px;
+            margin-bottom: 30px;
+            color: #e74c3c;
+        }
+        
+        .coming-soon h3 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #c0392b;
+        }
+        
+        .coming-soon p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+            color: #7f8c8d;
+        }
+        
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .character-placeholder {
+            background: #f9f9f9;
+            border-radius: var(--border-radius);
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px dashed #e74c3c;
+            opacity: 0.7;
+        }
+        
+        .character-placeholder:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+        
+        .character-placeholder i {
+            font-size: 60px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        /* История проекта */
+        #story {
+            background: linear-gradient(135deg, #f5f9ff 0%, #ebf2ff 100%);
+            display: none;
+        }
+        
+        #story .page-title::after {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #3498db;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+            width: 100%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 30px);
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 30px);
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            border-radius: 50%;
+            top: 30px;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -40px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -40px;
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .timeline-content h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        /* Страница глав */
+        #chapters {
+            background: linear-gradient(135deg, #fffdf5 0%, #fff9e6 100%);
+            display: none;
+        }
+        
+        #chapters .page-title::after {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+        }
+        
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .chapter-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .chapter-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .chapter-image {
+            height: 200px;
+            background: #f39c12;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(243, 156, 18, 0.8), rgba(230, 126, 34, 0.9));
+        }
+        
+        .chapter-image span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .chapter-content {
+            padding: 25px;
+        }
+        
+        .chapter-content h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .chapter-content p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .chapter-number {
+            display: inline-block;
+            background: #f39c12;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        /* Подвал */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #2ecc71;
+            border-radius: 2px;
+        }
+        
+        .footer-section p {
+            line-height: 1.7;
+            color: #ecf0f1;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: #2ecc71;
+            transform: translateY(-5px);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: #2ecc71;
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+        
+        /* Анимации */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item:nth-child(odd) {
+                padding-right: 0;
+                padding-left: 70px;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(even) {
+                padding-left: 70px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::before {
+                left: 26px;
+                right: auto;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: 26px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-text h3 {
+                font-size: 28px;
+            }
+            
+            .page-title h2 {
+                font-size: 32px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .hero-image {
+                height: 250px;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <h1>Райзалюция</h1>
+                <span>от MushyStudio</span>
+            </div>
+            <nav>
+                <ul>
+                  <li><a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Главная</a></li>
+                <li><a href="#" class="nav-link" data-page="characters"><i class="fas fa-users"></i> Персонажи</a></li>
+                <li><a href="#" class="nav-link" data-page="story"><i class="fas fa-history"></i> История проекта</a></li>
+                <li><a href="#" class="nav-link" data-page="chapters"><i class="fas fa-book"></i> Главы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главная страница -->
+    <section id="home" class="page">
+        <div class="container">
+            <div class="page-title">
+                <h2>Райзалюция</h2>
+                <p>И пора её познавать</p>
+            </div>
+            
+            <div class="content">
+                <div class="hero">
+                    <div class="hero-text">
+                        <h3>От начала до конца и обратно</h3>
+                        <p>Райзалюция — это название истории, охватывающей две сюжетные арки (сезона), возможно — будет и третий. Это не просто рассказ, а целая вселенная, в которой действуют оригинальные персонажи, происходят масштабные события, и затрагиваются глубокие темы: любовь, потери, борьба со злом, поиск смысла, свобода воли и жертвы ради других.</p>
+                        <a href="https://t.me/Raine_Creativity" class="btn">Следите за новостями!</a>
+                    </div>
+                    <div class="hero-image floating">
+                        <!-- Placeholder for image -->
+                    </div>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h4>Увлекательный сюжет</h4>
+                        <p>Проект неоднократно переосмыслялся и переписывался, чтобы выглядеть с каждым разом всё лучше и лучше.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Мы с вами с 2017г</h4>
+                        <p>Каждый герой рождался не сразу — за ним тянется длинная история переосмыслений, проб и вдохновений.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h4>Большая история</h4>
+                        <p>История рождается из пустоты — с малого, почти незаметного начала.
+Но путь приводит её к величайшему сражению во вселенной,
+где решается не только судьба героев, но и сама истина мироздания..</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Персонажи -->
+    <section id="characters" class="page">
+        <div class="container">
+            <div class="page-title">
+                <h2>Персонажи</h2>
+                <p>Знакомьтесь с героями нашего мира</p>
+            </div>
+            
+            <div class="content">
+                <div class="coming-soon">
+                    <i class="fas fa-user-clock"></i>
+                    <h3>Скоро появятся!</h3>
+                    <p>Мы активно работаем над созданием уникальных персонажей для нашего проекта. Скоро вы сможете познакомиться с каждым из них и узнать их судьбу.</p>
+                    <a href="https://t.me/Raine_Creativity" class="btn" style="background: linear-gradient(90deg, #e74c3c, #c0392b);">Узнать о новостях</a>
+                </div>
+                
+                <div class="character-grid">
+                    <div class="character-placeholder">
+                        <i class="fas fa-user-secret"></i>
+                        <p>Что? Сказали же - "Ждём"</p>
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- История проекта -->
+    <section id="story" class="page">
+        <div class="container">
+            <div class="page-title">
+                <h2>История проекта</h2>
+                <p>Как создавалась Райзалюция</p>
+            </div>
+            
+            <div class="content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                             <span class="timeline-date">Апрель 2017</span>
+                            <h4>Зарождение всего</h4>
+                            <p>Тогда, от скуки, мы начали писать короткие забавные истории про обычных подростков, которые в будущем ушли в прообразы для текущих персонажей.</p>
+
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                             <span class="timeline-date">Июль 2020</span>
+                            <h4>Дорога к творчеству</h4>
+                            <p>В эпоху COVID-19 все сидели дома, ну вот и мы сидели. Это время было поворотным для нашей студии, который заложил фундамент для всего, что сейчас строится.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Август 2021</span>
+                            <h4>Глобальное расширение вымышленной вселенной</h4>
+                            <p>2021 стал для нас очень масштабным, в нём были созданы проекты по типу Н-сити. Были созданы персонажи по типу Мушейди и Сана и многое другое!</p>
+                    </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                               <span class="timeline-date">Март 2023</span>
+                            <h4>Глобальные эксперименты</h4>
+                            <p>Мы создали очень много персонажей из-за своих экспериментов и очень сильно прописали некоторых из них, делая текущую историю очень живой.</p>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Ноябрь 2024</span>
+                            <h4>Создание самой студии</h4>
+                            <p>Мы очень долго ждали этого и наконец-то это свершилось. Творческая студия официально начала своё существование!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Настоящее время</span>
+                            <h4>Активная разработка</h4>
+                            <p>Сейчас все глобальные новости проекта публикуются в телеграм-канал.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Главы -->
+    <section id="chapters" class="page">
+        <div class="container">
+            <div class="page-title">
+                <h2>Главы</h2>
+                <p>Путеводитель по истории</p>
+            </div>
+            
+            <div class="content">
+                <div class="coming-soon">
+                    <i class="fas fa-book"></i>
+                    <h3>Скоро будут доступны!</h3>
+                    <p>Мы усердно работаем над созданием увлекательной истории, которую вы долго не забудете!.</p>
+                    <a href="https://t.me/Raine_Creativity" class="btn" style="background: linear-gradient(90deg, #f39c12, #e67e22);">Следите за новостями!</a>
+                </div>
+                
+              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>О MushyStudio</h3>
+                    <p>Мы - молодая творческая студия, которая желает радовать вас занимательными проектами. Наша задача - дарить эмоции!</p>
+                    <div class="social-links">
+                  
+                        <a href="https://t.me/Raine_Creativity"><i class="fab fa-telegram"></i></a>
+                        
+                     
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>???</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> НАЧНИ ПОЗНАВАТЬ РАЙЗАЛЮЦИЮ</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Я тебе отвечаю, братан</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Вещь реально годная</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Зачем ты это читаешь?</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Как твои дела? :D</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-envelope"></i> mushystudio.corp@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Н-сити, ул. Изумрудная, 21</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2017-2025 MushyStudio. Все права защищены. Проект "Райзалюция"</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Навигация между страницами
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            // Показываем главную страницу при загрузке
+            document.getElementById('home').style.display = 'block';
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Обновляем активную ссылку
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Скрываем все страницы
+                    pages.forEach(page => {
+                        page.style.display = 'none';
+                        page.style.opacity = '0';
+                        page.style.transform = 'translateY(20px)';
+                    });
+                    
+                    // Показываем целевую страницу с анимацией
+                    const targetElement = document.getElementById(targetPage);
+                    if (targetElement) {
+                        targetElement.style.display = 'block';
+                        setTimeout(() => {
+                            targetElement.style.opacity = '1';
+                            targetElement.style.transform = 'translateY(0)';
+                        }, 10);
+                    }
+                    
+                    // Прокрутка вверх
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                });
+            });
+            
+            // Плавная прокрутка для якорей
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Анимация при прокрутке
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.feature-card, .timeline-content, .chapter-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Эффект параллакса для шапки
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                } else {
+                    header.style.boxShadow = 'none';
+                    header.style.background = 'rgba(255, 255, 255, 0.9)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
